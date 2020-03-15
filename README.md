@@ -24,4 +24,19 @@ right after ```config.load_defaults 5.2``` in the config/application.rb file.
 
 7. To give a little background, starting your Rails server creates an instance of a Router. This Router holds instances of Routes that are defined by your routes.rb. When a request comes in, the Router tries to match a Route based on the HTTP method and the url path (it does this with a regular expression, if you know what that is already). The first matched Route then instantiates an instance of the specified controller, and calls the specified action on it.
 
-8. We have our initial routes now and have the endpoints necessary to manage a User resource. Notice though that our routes point to a UsersController, which we don't actually have yet. Nor do we have a User model. We'll add that later, too. Soon!
+8. We have our initial routes now and have the endpoints necessary to manage a User resource. Notice though that our routes point to a UsersController, which we don't actually have yet. Nor do we have a User model. 
+
+## First Controller
+
+Each API endpoint creates/reads/updates/destroys (CRUD) a resource.
+
+The router defines API endpoints (URLs), and records which controller and action to invoke for each one. Each API endpoint has a conventional meaning: create/read/update/destroy a resource. The controllers and their actions are the ones actually doing the CRUD ing.
+
+I will create my first controller by navigating to ```app/controllers/``` and creating a new file called ```users_controller.rb``` 
+
+``` 
+class UsersController < ApplicationController
+end
+```
+Note that controllers are always plural; a controller manages requests that pertain to a collection of resources. 
+A resource is anything in your application that you will be CRUDing.
