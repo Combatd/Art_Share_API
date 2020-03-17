@@ -157,3 +157,5 @@ For every request, the server will tell you which controller and action is proce
 
 Woohoo! Your Postman request should have returned the string "I'm in the index action!" 
 Victory is yours. Congratulations on successfully setting up, making, and processing your first Rails request.
+
+## Playing with Parameters
