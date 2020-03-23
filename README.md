@@ -83,7 +83,6 @@ In your browser, navigate to http://localhost:3000.
 Voila! A running Rails app with what will become a very familiar index page.
 
 ## First Request
-Postman should already be installed, but if not, go ahead and install it.
 
 Now let's try to get a list of all our users - our users index. 
 This means we need to make a request that matches the HTTP verb and URI pattern that routes to 'UsersController#index'. 
@@ -156,6 +155,59 @@ Completed 200 OK in 1ms (Views: 0.6ms)
 For every request, the server will tell you which controller and action is processing it. In this case, it was the UsersController's index action.
 
 Woohoo! Your Postman request should have returned the string "I'm in the index action!" 
-Victory is yours. Congratulations on successfully setting up, making, and processing your first Rails request.
 
 ## Playing with Parameters
+
+```
+Started GET "/users?favorite_food=pizza" for 127.0.0.1 at 2017-07-14 11:51:31 -0700
+Processing by UsersController#index as */*
+  Parameters: {"favorite_food"=>"pizza"}
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 1.3ms)
+```
+```
+Started POST "/users" for ::1 at 2017-06-19 10:09:29 -0700
+
+AbstractController::ActionNotFound (The action 'create' could not be found for UsersController):
+
+```
+* Add create method to the UsersController
+```
+class UsersController < ApplicationController
+  def create
+    render json: params
+  end
+end
+```
+* POST request to UsersController
+```
+{
+  "fav_food": "pizza",
+  "controller": "users",
+  "action": "create"
+}
+```
+* Nest your Parameters
+```
+<!-- in Postman's "Body" tab: -->
+some_category[a_key]: 'another value'
+some_category[a_second_key]: 'yet another value'
+some_category[inner_inner_hash][key]: 'value'
+something_else: 'aaahhhhh'
+
+<!-- in the query string -->
+'/users?some_category[a_key]=another+value&some_category[a_second_key]=yet+another+value'
+<!-- ...etc. -->
+```
+After building out the rest of the CRUD routes, should be able to perform all the actions regarding the Users Table, with error handling.
+```
+def create
+  user = User.new(params.require(:user).permit(:name, :email))
+  if user.save
+    render json: user
+  else
+    render json: user.errors.full_messages, status: :unprocessable_entity
+  end
+end
+```
