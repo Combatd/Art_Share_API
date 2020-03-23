@@ -1,5 +1,7 @@
-# First Routes & Controllers
+# Art Share API
 This project demonstrates Rails routing.
+
+Each user has a set of artworks that they own/control. These artworks can also be shared with other users. An artwork that has been shared with one or more other users will be visible to those users, but the artwork still 'belongs to' the original user.
 
 ## Learning Goals
 * Be able to create routes in routes.rb
@@ -8,6 +10,12 @@ This project demonstrates Rails routing.
 * Be able to nest query parameters
 * Be able to write controller actions that read from and write to the database
 * Know how and when to render errors
+* Be able to write Active Record models quickly
+* Know how to write a user_params method
+* Be able to write the five API RESTful controller methods
+* Know how to test your API endpoints with Postman
+* Know how to create and destroy join table records via controller methods
+* Know how a nested route works
 
 ## First Routes
 1. Setup database with ``` bundle exec rails db:create ```
