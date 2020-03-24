@@ -219,3 +219,15 @@ def create
   end
 end
 ```
+
+With the Users routes created, it is time to implement other functionality.
+
+## Phase 1: Data Layer
+
+In this first phase we're going to add the tables for users, artworks, and artwork shares. We are also going to write validations and associations linking them.
+
+### User
+
+For the user table you should have name and email columns from the first routes. Change the User model so that you only have one column: ```username```. Write new migrations to accomplish this. Enforce presence and uniqueness of username at both ActiveRecord and DB levels.
+
+After you create each table and model, make sure to test that your associations and validations are working before moving on to the next step. We want to be absolutely sure our code is working before we move on to the next phase, otherwise building our API endpoints will be needlessly complicated.
