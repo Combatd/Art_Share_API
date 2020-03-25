@@ -231,3 +231,15 @@ In this first phase we're going to add the tables for users, artworks, and artwo
 For the user table you should have name and email columns from the first routes. Change the User model so that you only have one column: ```username```. Write new migrations to accomplish this. Enforce presence and uniqueness of username at both ActiveRecord and DB levels.
 
 After you create each table and model, make sure to test that your associations and validations are working before moving on to the next step. We want to be absolutely sure our code is working before we move on to the next phase, otherwise building our API endpoints will be needlessly complicated.
+
+### Artwork
+
+For your artworks table you should have the following columns: ```title```, ```image_url```, and ```artist_id```. All of these should be present. Add ActiveRecord validations and DB constraints.
+
+Ensure a single user cannot have two artworks with the same title. On the other hand, two different users can have artworks with the same title. In other words, two separate artists could both have artworks of their own named "Untitled", but a single artist should not be able to have two pieces with that same title.
+
+This means that the ```artist_id``` and ```title``` combination must be unique. Enforce this at the DB and model levels. Here's some help for the model validation To add the DB constraint, consider what would happen if we added indexing and a uniqueness constraint to not one, but two columns. Check this Stack Overflow answer for more info
+
+Add an index on ```artist_id``` so that we can quickly get all the artworks for a user. Also add associations between ```User``` and ```Artwork```. The association from ```Artwork``` to ```User``` should be called ```artist```. Note that our column in the ```artworks``` table does not have to be ```user_id``` despite being a foreign key to the ```users``` table. In this case, ```artist_id``` is much more descriptive and therefore preferable.
+
+### ArtworkShare
