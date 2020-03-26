@@ -243,3 +243,13 @@ This means that the ```artist_id``` and ```title``` combination must be unique. 
 Add an index on ```artist_id``` so that we can quickly get all the artworks for a user. Also add associations between ```User``` and ```Artwork```. The association from ```Artwork``` to ```User``` should be called ```artist```. Note that our column in the ```artworks``` table does not have to be ```user_id``` despite being a foreign key to the ```users``` table. In this case, ```artist_id``` is much more descriptive and therefore preferable.
 
 ### ArtworkShare
+
+The ```artwork_shares``` table is a join table. Its whole purpose is to link a User (the person viewing the artwork) with an ```Artwork```.
+
+You'll need an ```artwork_id``` and ```viewer_id``` column. Again, prefer columns names that are more semantic (i.e. more descriptive of the relationship) when possible.
+
+Ensure that both are present. Add the two levels of validations/constraints. Ensure that a user cannot have a single Artwork shared with them more than once. Also add indices to ```ArtworkShare```'s foreign key columns for fast lookup. NB: we almost always want to create indexes for any foreign keys, particularly if those foreign keys will be used in a ```has_many``` or a ```has_one``` relationship.
+
+Then add associations connecting an ```ArtworkShare``` to both an ```Artwork``` and a ```User``` (name this association ```viewer```). Add a through association ```shared_viewers``` on ```Artwork```. ```Artwork#shared_viewers``` will return the set of users with whom an artwork has been shared.
+
+Add a ```through``` association from ```shared_artworks``` on ```User```. ```User#shared_artworks``` will return the set of artworks that have been shared with that user (not the set of artworks that a user has shared with others).
