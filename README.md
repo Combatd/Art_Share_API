@@ -253,3 +253,7 @@ Ensure that both are present. Add the two levels of validations/constraints. Ens
 Then add associations connecting an ```ArtworkShare``` to both an ```Artwork``` and a ```User``` (name this association ```viewer```). Add a through association ```shared_viewers``` on ```Artwork```. ```Artwork#shared_viewers``` will return the set of users with whom an artwork has been shared.
 
 Add a ```through``` association from ```shared_artworks``` on ```User```. ```User#shared_artworks``` will return the set of artworks that have been shared with that user (not the set of artworks that a user has shared with others).
+
+## Phase 2: Users and Artworks API
+
+The API describes how to expose your data and specifies how the outside world can interact with it. I will use the Postman web application to test each controller. The Rails server log will provide valuable insight to causes of errors when I have to debug.
