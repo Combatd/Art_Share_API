@@ -257,3 +257,12 @@ Add a ```through``` association from ```shared_artworks``` on ```User```. ```Use
 ## Phase 2: Users and Artworks API
 
 The API describes how to expose your data and specifies how the outside world can interact with it. I will use the Postman web application to test each controller. The Rails server log will provide valuable insight to causes of errors when I have to debug.
+
+
+* ```user_params helper method```
+This method should be private. It requires the key :user in params, and permits each of the user attributes as keys in the nested hash.
+
+* ```create (POST /users)```
+Remember to use if user.save to check if validations passed. On error, this action should render validation errors using user.errors.full_messages. Set the status code to indicate error.
+
+* ```destroy (DELETE /users/:id)```
