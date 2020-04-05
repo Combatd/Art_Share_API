@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(name: "Mark")
-User.create!(name: "Julia")
-User.create!(name: "Arjun")
-User.create!(name: "Hassen")
+User.create!(username: "Mark")
+User.create!(username: "Julia")
+User.create!(username: "Arjun")
+User.create!(username: "Hassen")
 
 Artwork.create!(title: 'Mona Lisa', image_url: 'tinyurl.com/mona_lisa', artist_id: 2)
 Artwork.create!(title: 'Red Mars', image_url: 'imgur.com/red_mars', artist_id: 2)
