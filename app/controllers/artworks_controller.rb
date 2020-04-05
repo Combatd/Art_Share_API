@@ -1,10 +1,10 @@
 class ArtworksController < ApplicationController
     def index
-        if params[:artwork]
-            render json: Artwork.where(title: params[:title]) 
-        else
-            render json: Artwork.all
-        end
+      artist = User.find(params[:user_id])
+      render json: {
+          artworks: artist.artworks,
+          artwork_shares: artist.artwork_shares
+      }
     end
 
     def show
