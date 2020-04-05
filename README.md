@@ -266,3 +266,9 @@ This method should be private. It requires the key :user in params, and permits 
 Remember to use if user.save to check if validations passed. On error, this action should render validation errors using user.errors.full_messages. Set the status code to indicate error.
 
 * ```destroy (DELETE /users/:id)```
+
+This un-shares an Artwork with a User. To delete a share, the user should issue a DELETE to /artwork_shares/123, where 123 is the id of the ArtworkShare to destroy.
+
+### User's Artworks: nested routes
+We want to be able to fetch the Artworks of a particular user.
+For example, you will be able to get user 1's artworks through ```GET /users/1/artworks```, user 2's through ```GET /users/2/artworks```, etc.
