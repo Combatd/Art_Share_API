@@ -248,13 +248,13 @@ The ```artwork_shares``` table is a join table. Its whole purpose is to link a U
 
 You'll need an ```artwork_id``` and ```viewer_id``` column. Again, prefer columns names that are more semantic (i.e. more descriptive of the relationship) when possible.
 
-Ensure that both are present. Add the two levels of validations/constraints. Ensure that a user cannot have a single Artwork shared with them more than once. Also add indices to ```ArtworkShare```'s foreign key columns for fast lookup. NB: we almost always want to create indexes for any foreign keys, particularly if those foreign keys will be used in a ```has_many``` or a ```has_one``` relationship.
+No null values! Two levels of validations/constraints. Ensures that a user cannot have a single Artwork shared with them more than once. We index to ```ArtworkShare```'s foreign key columns for fast lookup. NB: we almost always want to create indexes for any foreign keys, particularly if those foreign keys will be used in a ```has_many``` or a ```has_one``` relationship.
 
 Then add associations connecting an ```ArtworkShare``` to both an ```Artwork``` and a ```User``` (name this association ```viewer```). Add a through association ```shared_viewers``` on ```Artwork```. ```Artwork#shared_viewers``` will return the set of users with whom an artwork has been shared.
 
-Add a ```through``` association from ```shared_artworks``` on ```User```. ```User#shared_artworks``` will return the set of artworks that have been shared with that user (not the set of artworks that a user has shared with others).
+There is a ```through``` association from ```shared_artworks``` on ```User```. ```User#shared_artworks``` will return the set of artworks that have been shared with that user (not the set of artworks that a user has shared with others).
 
-## Phase 2: Users and Artworks API
+## Users and Artworks API
 
 The API describes how to expose your data and specifies how the outside world can interact with it. I will use the Postman web application to test each controller. The Rails server log will provide valuable insight to causes of errors when I have to debug.
 
@@ -272,3 +272,9 @@ This un-shares an Artwork with a User. To delete a share, the user should issue 
 ### User's Artworks: nested routes
 We want to be able to fetch the Artworks of a particular user.
 For example, you will be able to get user 1's artworks through ```GET /users/1/artworks```, user 2's through ```GET /users/2/artworks```, etc.
+
+## Last Phase with Comments
+* The ```CommentsController``` should have create, destroy, and index actions.
+* In order to retrieve comments for an artwork or a user we want our index action to handle some additional params.
+  *  ```user_id``` or an ```artwork_id```
+It should now be possible to make GET requests to CommentsController#index and depending on the params provided either return comments made by a particular user or comments made on a particular piece of artwork.
